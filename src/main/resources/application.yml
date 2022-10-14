@@ -1,0 +1,82 @@
+spring:
+  profiles:
+    group:
+      "local": "local_db, local_log, common"
+      "dev": "dev_db, dev_log, common"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "local_db"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3309/springjpadb
+    hikari:
+      username: root
+      password: password
+      maximum-pool-size: 20
+      minimum-idle: 20
+
+  flyway:
+    enabled: false
+#  flyway:
+#    enabled: true
+#    user: root
+#    password: password
+#    url: jdbc:mysql://localhost:3309/springjpadb
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev_db"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3309/springjpadb
+    hikari:
+      username: ${DEV_DB_USERNAME}
+      password: ${DEV_DB_PASSWORD}
+      maximum-pool-size: ${DEV_DB_POOLSIZE}
+      minimum-idle: ${DEV_DB_IDLE}
+
+  flyway:
+    enabled: false
+
+---
+spring:
+  config:
+    activate:
+      on-profile: "local_log"
+logging:
+  level:
+    root: info
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev_log"
+logging:
+  level:
+    root: info
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
+---
+spring:
+  config:
+    activate:
+      on-profile: "common"
+  jpa:
+    hibernate:
+      ddl-auto: none
+  batch:
+    job:
+      names: ${JOB_NAME:NONE}
+#    jdbc:
+#      initialize-schema: always

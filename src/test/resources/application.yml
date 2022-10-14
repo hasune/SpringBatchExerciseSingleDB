@@ -1,0 +1,21 @@
+spring:
+
+  datasource:
+    url: jdbc:mysql://localhost:3309/springjpadb
+    username: root
+    password: password
+
+---
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+#  batch:
+#    job:
+#      names: ${JOB_NAME:NONE}
+#    jdbc:
+#      initialize-schema: always
+
+app:
+  value1: "hello"
+  value2: "world"

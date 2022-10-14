@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS member
+(
+    id   INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(10),
+    age  VARCHAR(2),
+    PRIMARY KEY (id)
+);
